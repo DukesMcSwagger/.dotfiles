@@ -10,6 +10,7 @@ alias dup="docker compose up -d --force-recreate"
 alias dupf="~/.dotfiles/.scripts/docker-compose-container-init.sh"
 alias gitc="git diff --name-only --diff-filter=U --relative"
 
+
 # changes color of user@host
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
@@ -31,7 +32,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   # autoload colors && colors
   # PS1="%{$fg[green]%}%n@%{$fg[green]%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}$ "
   #
-
   function jhome {
 	  export JAVA_HOME=$(/usr/libexec/java_home -v "$1")
 	  echo "JAVA_HOME set to: $JAVA_HOME"
@@ -39,11 +39,12 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 	}
 
   # import anaconda into $PATH
-  PATH=/opt/homebrew/anaconda3/bin:"$PATH"
+  export PATH=/opt/homebrew/anaconda3/bin:"$PATH"
   # import vscode-cpptools debugger to $PATH
-  PATH=/Users/eric/debuggers/cpptools-macOS-arm64/extension/debugAdapters/bin:"$PATH"
+  export PATH=/Users/eric/debuggers/cpptools-macOS-arm64/extension/debugAdapters/bin:"$PATH"
   # import lldb into $PATH
-  PATH=/opt/homebrew/opt/llvm/bin:"$PATH"
+  export PATH=/opt/homebrew/opt/llvm/bin:"$PATH"
+  export PATH="/opt/homebrew/bin:$PATH"
 fi
 
 # stuff for nvm (node version manager)
@@ -56,9 +57,9 @@ alias read_mouse_sense="defaults read -g com.apple.mouse.scaling"
 # set to 1 for a 400 dpi gaming mouse
 function SetMouseSense() {
   if "$1" = "apple_mouse"; then
-    ~/.dotfiles/.scripts/set_mouse_sensitivity.sh "0.375"
+    ~/.dotfiles/.scripts/set_mouse_sensitivity_mac.sh "0.375"
   else
-    ~/.dotfiles/.scripts/set_mouse_sensitivity.sh "$1"
+    ~/.dotfiles/.scripts/set_mouse_sensitivity_mac.sh "$1"
   fi
 }
 
